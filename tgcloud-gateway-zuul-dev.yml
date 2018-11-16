@@ -1,0 +1,102 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+tgcloud:
+  enableSqlLogInterceptor: false
+
+zuul:
+  host:
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+  forceOriginalQueryStringEncoding: true
+  routes:
+    aus-route:
+      path: /aus/**
+      sensitiveHeaders:
+      service-id: tgcloud-security-authserver
+      ribbon:
+        eager-load:
+          enabled: true
+        MaxAutoRetries: 1
+        MaxAutoRetriesNextServer: 2
+        OkToRetryOnAllOperations: false
+        ConnectTimeout: 10000
+        ReadTimeout: 10000
+    dmc-route:
+      path: /dmc/**
+      sensitiveHeaders:
+      service-id: tgcloud-microservice-dmc
+      ribbon:
+        eager-load:
+          enabled: true
+        MaxAutoRetries: 1
+        MaxAutoRetriesNextServer: 2
+        OkToRetryOnAllOperations: false
+        ConnectTimeout: 10000
+        ReadTimeout: 10000
+    uac-route:
+      path: /uac/**
+      sensitiveHeaders:
+      service-id: tgcloud-microservice-uac
+      ribbon:
+        eager-load:
+          enabled: true
+        MaxAutoRetries: 1
+        MaxAutoRetriesNextServer: 2
+        OkToRetryOnAllOperations: false
+        ConnectTimeout: 10000
+        ReadTimeout: 10000
+  add-proxy-headers: true
+  add-host-header: true
+  ribbon-isolation-strategy: thread #设置Hystrix隔离策略为线程池
+  thread-pool:
+    use-separate-thread-pools: true #每个路由使用独立的线程池
+  ratelimit: #zull 限流配置
+    key-prefix: tgcloud-ratelimit
+    enabled: true
+    repository: REDIS
+    behind-proxy: true
+    default-policy-list: #optional - will apply unless specific policy exists
+      - limit: 100 #optional - request number limit per refresh interval window
+        quota: 100 #optional - request time limit per refresh interval window (in seconds)
+        refresh-interval: 3 #default value (in seconds)
+        type: #optional
+          - user
+          - origin
+          - url
+    policy-list:
+      aus-route:
+        - limit: 10
+          quota: 1000
+          refresh-interval: 60
+          type:
+            - origin
+            - url=/auth/code
+
+security:
+  oauth2:
+    client:
+      clientId: tgcloud-client-gateway
+      clientSecret: tgcloudClientSecret
+      access-token-uri: http://${GATEWAY_HOST:localhost}:${GATEWAY_PORT:7979}/aus/oauth/token
+      user-authorization-uri: http://${GATEWAY_HOST:localhost}:${GATEWAY_PORT:7979}/aus/oauth/authorize
+    resource:
+      user-info-uri: http://localhost:8999/user
+      prefer-token-info: false
+      jwt:
+        key-uri: http://localhost:8999/oauth/token_key
+
+proxy:
+  auth:
+    routes:
+      aus-route: oauth2
+
+# swagger butler配置
+swagger.butler.api-docs-path: v2/api-docs
+swagger.butler.swagger-version: 1.0
+swagger.butler.auto-generate-from-zuul-routes: true
+# 指定要生成的范围
+swagger.butler.generate-routes: uac-route,dmc-route
