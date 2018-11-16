@@ -5,7 +5,7 @@ spring:
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:mysql://localhost:3306/tgcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
+    url: jdbc:mysql://mysql.tgcloud.net:3306/tgcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
 mybatis:
   type-aliases-package: com.tiger.tgcloud.uac.model.domain
   mapper-locations: classpath:mapper/*.xml,classpath*:sdk/mapper/*.xml
@@ -25,14 +25,14 @@ security:
     client:
       clientId: tgcloud-microservice-uac
       clientSecret: tgcloudClientSecret
-      access-token-uri: http://${GATEWAY_HOST:localhost}:${GATEWAY_PORT:7979}/aus/oauth/token
-      user-authorization-uri: http://${GATEWAY_HOST:localhost}:${GATEWAY_PORT:7979}/aus/oauth/authorize
+      access-token-uri: http://${GATEWAY_HOST:api.tgcloud.net}:${GATEWAY_PORT:7979}/aus/oauth/token
+      user-authorization-uri: http://${GATEWAY_HOST:api.tgcloud.net}:${GATEWAY_PORT:7979}/aus/oauth/authorize
       clientAuthenticationScheme: header
     resource:
-      user-info-uri: http://${GATEWAY_HOST:localhost}:${GATEWAY_PORT:7979}/aus/user
+      user-info-uri: http://${GATEWAY_HOST:api.tgcloud.net}:${GATEWAY_PORT:7979}/aus/user
       prefer-token-info: false
       jwt:
-        key-uri: http://localhost:8999/oauth/token_key
+        key-uri: http://auth.tgcloud.net:8999/oauth/token_key
 tgcloud:
   auth:
     rest-pwd-url: http://passport.tgcloud.net:9999/resetPwd?resetPwdKey=
