@@ -1,0 +1,49 @@
+spring:
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  jackson:
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    url: jdbc:mysql://localhost:3306/tgcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
+mybatis:
+  type-aliases-package: com.tiger.tgcloud.uac.model.domain
+  mapper-locations: classpath:mapper/*.xml,classpath*:sdk/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+mapper:
+  mappers: com.tiger.tgcloud.core.mybatis.MyMapper
+  not-empty: false
+  identity: MYSQL
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+security:
+  oauth2:
+    client:
+      clientId: tgcloud-microservice-uac
+      clientSecret: tgcloudClientSecret
+      access-token-uri: http://${GATEWAY_HOST:localhost}:${GATEWAY_PORT:7979}/aus/oauth/token
+      user-authorization-uri: http://${GATEWAY_HOST:localhost}:${GATEWAY_PORT:7979}/aus/oauth/authorize
+      clientAuthenticationScheme: header
+    resource:
+      user-info-uri: http://${GATEWAY_HOST:localhost}:${GATEWAY_PORT:7979}/aus/user
+      prefer-token-info: false
+      jwt:
+        key-uri: http://localhost:8999/oauth/token_key
+tgcloud:
+  auth:
+    rest-pwd-url: http://passport.tgcloud.net:9999/resetPwd?resetPwdKey=
+    active-user-url: http://passport.tgcloud.net:9999/activeUser
+    refresh-token-url: http://api.tgcloud.net:7979/uac/oauth/token
+  oauth2:
+    client:
+      id: ${security.oauth2.resource.id}
+      accessTokenUrl: ${security.oauth2.client.access-token-uri}
+      clientId: ${security.oauth2.client.clientId}
+      clientSecret: ${security.oauth2.client.clientSecret}
+      clientAuthenticationScheme: header
+      tokenStore: jwt
+  enableSqlLogInterceptor: false
