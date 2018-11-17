@@ -8,7 +8,7 @@ spring:
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:mysql://localhost:3306/tgcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
+    url: jdbc:mysql://mysql.tgcloud.net:3306/tgcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
 
 mybatis:
   type-aliases-package: com.tiger.tgcloud.dmc.model.domain
