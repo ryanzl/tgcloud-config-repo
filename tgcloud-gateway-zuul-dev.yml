@@ -76,6 +76,19 @@ zuul:
             - origin
             - url=/auth/code
 
+security:
+  oauth2:
+    client:
+      clientId: tgcloud-client-gateway
+      clientSecret: tgcloudClientSecret
+      access-token-uri: http://${GATEWAY_HOST:api.tgcloud.net}:${GATEWAY_PORT:7979}/aus/oauth/token
+      user-authorization-uri: http://${GATEWAY_HOST:api.tgcloud.net}:${GATEWAY_PORT:7979}/aus/oauth/authorize
+    resource:
+      user-info-uri: http://auth.tgcloud.net:8999/user
+      prefer-token-info: false
+      jwt:
+        key-uri: http://auth.tgcloud.net:8999/oauth/token_key
+
 proxy:
   auth:
     routes:
