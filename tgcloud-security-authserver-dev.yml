@@ -86,4 +86,3 @@ logging:
     org.springframework.security: DEBUG
   path: logs/
   file: ${spring.application.name}.log
-  file: ${spring.application.name}.log
