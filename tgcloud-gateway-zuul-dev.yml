@@ -16,43 +16,43 @@ zuul:
     connect-timeout-millis: 60000
   forceOriginalQueryStringEncoding: true
   ignoredServices: '*' #忽略自动添加的服务比如从eureka动态获取的服务
-  routes:
-    aus-route:
-      path: /aus/**
-      sensitiveHeaders:
-      service-id: tgcloud-security-authserver
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
-    dmc-route:
-      path: /dmc/**
-      sensitiveHeaders:
-      service-id: tgcloud-microservice-dmc
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
-    uac-route:
-      path: /uac/**
-      sensitiveHeaders:
-      service-id: tgcloud-microservice-uac
-      ribbon:
-        eager-load:
-          enabled: true
-        MaxAutoRetries: 1
-        MaxAutoRetriesNextServer: 2
-        OkToRetryOnAllOperations: false
-        ConnectTimeout: 10000
-        ReadTimeout: 10000
+#  routes:
+#    aus-route:
+#      path: /aus/**
+#      sensitiveHeaders:
+#      service-id: tgcloud-security-authserver
+#      ribbon:
+#        eager-load:
+#          enabled: true
+#        MaxAutoRetries: 1
+#        MaxAutoRetriesNextServer: 2
+#        OkToRetryOnAllOperations: false
+#        ConnectTimeout: 10000
+#        ReadTimeout: 10000
+#    dmc-route:
+#      path: /dmc/**
+#      sensitiveHeaders:
+#      service-id: tgcloud-microservice-dmc
+#      ribbon:
+#        eager-load:
+#          enabled: true
+#        MaxAutoRetries: 1
+#        MaxAutoRetriesNextServer: 2
+#        OkToRetryOnAllOperations: false
+#        ConnectTimeout: 10000
+#        ReadTimeout: 10000
+#    uac-route:
+#      path: /uac/**
+#      sensitiveHeaders:
+#      service-id: tgcloud-microservice-uac
+#      ribbon:
+#        eager-load:
+#          enabled: true
+#        MaxAutoRetries: 1
+#        MaxAutoRetriesNextServer: 2
+#        OkToRetryOnAllOperations: false
+#        ConnectTimeout: 10000
+#        ReadTimeout: 10000
   add-proxy-headers: true
   add-host-header: true
   ribbon-isolation-strategy: thread #设置Hystrix隔离策略为线程池
