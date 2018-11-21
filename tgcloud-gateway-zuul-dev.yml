@@ -15,6 +15,7 @@ zuul:
     socket-timeout-millis: 60000
     connect-timeout-millis: 60000
   forceOriginalQueryStringEncoding: true
+  ignoredServices: '*' #忽略自动添加的服务比如从eureka动态获取的服务
   routes:
     aus-route:
       path: /aus/**
