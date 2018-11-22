@@ -59,21 +59,24 @@ tgcloud:
         totalMaxSendCount: 3
     oauth2:
       tokenStore: jwt # redis jwt
-      clients[0]:
-        clientId: tgcloud-client-gateway
-        clientSecret: tgcloudClientSecret
-        accessTokenValidateSeconds: 43200
-        scope: "*"
-      clients[1]:
-        clientId: tgcloud-microservice-dmc
-        clientSecret: tgcloudClientSecret
-        accessTokenValidateSeconds: 43200
-        scope: "*"
-      clients[2]:
-        clientId: tgcloud-microservice-uac
-        clientSecret: tgcloudClientSecret
-        accessTokenValidateSeconds: 43200
-        scope: "*"
+      accessTokenValidateSeconds: 43200
+      refreshTokenValiditySeconds: 2592000
+      scope: "*"
+#      clients[0]:
+#        clientId: tgcloud-client-gateway
+#        clientSecret: tgcloudClientSecret
+#        accessTokenValidateSeconds: 43200
+#        scope: "*"
+#      clients[1]:
+#        clientId: tgcloud-microservice-dmc
+#        clientSecret: tgcloudClientSecret
+#        accessTokenValidateSeconds: 43200
+#        scope: "*"
+#      clients[2]:
+#        clientId: tgcloud-microservice-uac
+#        clientSecret: tgcloudClientSecret
+#        accessTokenValidateSeconds: 43200
+#        scope: "*"
 
 logging:
   level:
