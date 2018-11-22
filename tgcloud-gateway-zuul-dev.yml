@@ -15,7 +15,7 @@ zuul:
     socket-timeout-millis: 60000
     connect-timeout-millis: 60000
   forceOriginalQueryStringEncoding: true
-  sensitiveHeaders: 
+  sensitiveHeaders:  #过滤客户端附带的headers
   ignoredServices: '*' #忽略自动添加的服务比如从eureka动态获取的服务
 #  routes:
 #    aus-route:
