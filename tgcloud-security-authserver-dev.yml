@@ -40,6 +40,7 @@ tgcloud:
   token:
     interceptor:
       enable: true
+  oauth2:
     client:
       id: ${security.oauth2.resource.id}
       accessTokenUrl: ${security.oauth2.client.access-token-uri}
