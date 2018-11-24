@@ -51,10 +51,6 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
 
 feign:
-  httpclient:
-    enabled: false
-  okhttp:
-    enabled: true
   hystrix:
     enabled: true
   client:
